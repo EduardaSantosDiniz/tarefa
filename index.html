@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Idade-Eduarda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Idade</h1>
+        <label for="birthDate">Digite sua data de nascimento:</label>
+        <input type="date" id="birthDate" required>
+        <button onclick="calculateAge()">Calcular Idade</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const birthDateInput = document.getElementById('birthDate').value;
+            if (!birthDateInput) {
+                document.getElementById('result').innerHTML = 'Por favor, insira uma data válida.';
+                return;
+            }
+            const birthDate = new Date(birthDateInput);
+            const today = new Date();
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            const status = age >= 18 ? 'maior de idade' : 'menor de idade';
+            document.getElementById('result').innerHTML = `Você tem ${age} anos e é ${status}.`;
+        }
+    </script>
+</body>
+
+</html>
